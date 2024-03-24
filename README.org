@@ -1,0 +1,42 @@
+#+STARTUP: overview
+#+STARTUP: hidestars
+#+OPTIONS: date:nil author:nil title:nil
+#+EXCLUDE_TAGS: noexport
+#+LINK_UP:
+#+LINK_HOME:
+
+# #+TITLE:
+# #+DATE:
+
+#+LATEX: \tableofcontents\clearpage
+
+* Prerequisites
+- Poetry[fn:poetry]
+- mise (optional)[fn:mise]
+
+[fn:poetry] https://python-poetry.org/
+[fn:mise] https://mise.jdx.dev/
+
+
+* Setup
+#+BEGIN_SRC bash
+  poetry install
+#+END_SRC
+
+
+* How to use
+** Add role
+#+BEGIN_SRC bash
+  cd roles
+  poetry run ansible-galaxy role init [role_name]
+
+  # optional (for testing)
+  cd [role_name]
+  poetry run molecule init scenario
+#+END_SRC
+
+** Run playbook
+#+BEGIN_SRC bash
+  # poetry run ansible-playbook -i [inventory_name] site.yml
+  poetry run ansible-playbook -i development site.yml
+#+END_SRC
