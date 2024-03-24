@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "ansible-base"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+ansible-core = "^2.16.3"
+
+[tool.poetry.group.dev.dependencies]
+molecule = "^24.2.0"
+ansible-lint = {version = "^24.2.0", markers = "platform_system != 'Windows'"}
+molecule-plugins = {version = "^23.5.3", extras = ["docker"]}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
