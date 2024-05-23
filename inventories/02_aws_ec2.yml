@@ -1,0 +1,30 @@
+---
+plugin: aws_ec2
+regions:
+  - ap-northeast-1
+aws_profile: "{{ lookup('env', 'AWS_PROFILE') }}"
+
+filters:
+  instance-state-name: running
+  tag:Project: Project*
+
+keyed_groups:
+  - key: tags.Project
+    prefix: tag_Project_
+    separator: ""
+  - key: tags:ResourceType
+    prefix: tag_ResourceType_
+    separator: ""
+
+groups:
+  webservers: "tags.ResourceType is match('^web')"
+  benchservers: "tags.ResourceType is match('^benchmark')"
+
+hostnames:
+  - tag:Name
+  - ip-address
+  - private-ip-address
+
+compose:
+  ansible_host: instance_id
+  ansible_user: ubuntu
